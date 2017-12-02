@@ -1,0 +1,48 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Day 1</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+<body>
+  <div class="container">
+
+      <form class="form" id="formRunCode">
+        <label for="inputSequence" class="sr-only">Sequence: </label>
+        <input type="text" id="inputSequence" class="form-control" placeholder="Sequence" required autofocus>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Go!</button>
+      </form>
+
+    </div> <!-- /container -->
+</body>
+</html>
+<script type='javascript' src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+$( "#formRunCode" ).submit(function(event) {
+  let sequence = $("#inputSequence").val()
+  if (sequence)
+    parseSequence(sequence)
+  else
+    alert('Please enter a sequence!')
+});
+
+// expect a string of numbers
+// produce a sum of all digits that match the next digit in the string
+// the end of the string loops around to the beginning
+function parseSequence(sequence) {
+  console.log(sequence)
+  let sum = 0
+  for (let i=0; i<sequence.length; i++) {
+    if (sequence[i] == sequence[i+1]) {
+      sum += parseInt(sequence[i])
+    }
+  }
+  if (sequence[0] == sequence[sequence.length-1])
+    sum += parseInt(sequence[0])
+
+  console.log('output sum: ' + sum)
+}
+</script>
