@@ -1,40 +1,8 @@
-<!doctype html>
-
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>Day 2</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-</head>
-<body>
-  <div class="container">
-
-      <form class="form" id="formRunCode">
-        <label for="inputSequence" class="sr-only">Sequence: </label>
-        <textarea id="inputMatrix"></textarea>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Go!</button>
-      </form>
-
-    </div> <!-- /container -->
-</body>
-</html>
-<script type='javascript' src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
-<script>
-$( "#formRunCode" ).submit(function(event) {
-  let matrix = $("#inputMatrix").val()
-  if (matrix)
-    computeChecksumDivNoLoop(matrix)
-  else
-    alert('Please enter a matrix!')
-});
-
 // expect a tab delimited matrix of numbers
 // to compute the checksum:
 // 1. find the difference between the largest and smallest values in each row
 // 2. compute the sum of this difference across all rows
-function computeChecksumDiff(matrix) {
+const computeChecksumDiff = function(matrix) {
   let lines = matrix.split('\n');
   let checksum = 0
   for (let i=0; i<lines.length; i++) {
@@ -54,7 +22,7 @@ function computeChecksumDiff(matrix) {
 // to compute the checksum:
 // 1. find the difference between the 2 entries that are evenly divisible
 // 2. compute the sum of this difference across all rows
-function computeChecksumDiv(matrix) {
+const computeChecksumDiv = function(matrix) {
   let lines = matrix.split('\n');
   let checksum = 0
   for (let i=0; i<lines.length; i++) {
@@ -69,8 +37,7 @@ function computeChecksumDiv(matrix) {
   }
   console.log('output checksum: ' + checksum)
 }
-
-function computeChecksumDivNoLoop(matrix) {
+const computeChecksumDivNoLoop = function(matrix) {
   let lines = matrix.split('\n');
   let checksum = 0
   let foundElem = 0
@@ -80,11 +47,8 @@ function computeChecksumDivNoLoop(matrix) {
       foundElem = sequence.find ((element) => {
         return (parseInt(element) % parseInt(sequence[i]) == 0) && element != sequence[i]
       }) || 0
-
       checksum += parseInt(foundElem)/sequence[i]
     }
   }
   console.log('output checksum: ' + checksum)
 }
-
-</script>
