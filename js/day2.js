@@ -8,9 +8,7 @@ const computeChecksumDiff = function(matrix) {
   for (let i=0; i<lines.length; i++) {
     let diff = 0
     let sortedArray = lines[i].split('\t').sort(function(a, b){return a-b})
-    console.log('sorted array: ' + sortedArray)
     diff = sortedArray[sortedArray.length-1] - sortedArray[0]
-    console.log('diff for line: ' + diff)
     checksum += diff
   }
 

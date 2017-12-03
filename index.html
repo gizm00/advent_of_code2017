@@ -29,6 +29,14 @@
 <script>
 let matrix = undefined
 
+// Utility functions
+let validateMatrix = function() {
+  matrix = $("#inputMatrix").val()
+  if (matrix === undefined)
+    alert('Please enter a matrix!')
+};
+
+// Day 1
 $('#parseSequence').on('click', function(event) {
   validateMatrix()
   let offset=1
@@ -38,12 +46,17 @@ $('#parseSequence').on('click', function(event) {
   parseSequence(matrix, offset)
 });
 
-let validateMatrix = function() {
-  matrix = $("#inputMatrix").val()
-  if (matrix === undefined)
-    alert('Please enter a matrix!')
-};
+// Day 2
+$('#dupeChecksum').on('click', function(event) {
+  validateMatrix()
+  console.log('calling computeChecksumDiff')
+  computeChecksumDiff(matrix)
+});
 
-
+$('#mod0Checksum').on('click', function(event) {
+  validateMatrix()
+  console.log('calling computeChecksumDivNoLoop')
+  computeChecksumDivNoLoop(matrix)
+});
 
 </script>
