@@ -25,7 +25,7 @@
 $( "#formRunCode" ).submit(function(event) {
   let matrix = $("#inputMatrix").val()
   if (matrix)
-    computeChecksumDiv(matrix)
+    computeChecksumDivNoLoop(matrix)
   else
     alert('Please enter a matrix!')
 });
@@ -65,6 +65,23 @@ function computeChecksumDiv(matrix) {
           checksum += sequence[i] / sequence[n]
         }
       }
+    }
+  }
+  console.log('output checksum: ' + checksum)
+}
+
+function computeChecksumDivNoLoop(matrix) {
+  let lines = matrix.split('\n');
+  let checksum = 0
+  let foundElem = 0
+  for (let i=0; i<lines.length; i++) {
+    let sequence = lines[i].split('\t')
+    for (let i=0; i<sequence.length; i++) {
+      foundElem = sequence.find ((element) => {
+        return (parseInt(element) % parseInt(sequence[i]) == 0) && element != sequence[i]
+      }) || 0
+
+      checksum += parseInt(foundElem)/sequence[i]
     }
   }
   console.log('output checksum: ' + checksum)
