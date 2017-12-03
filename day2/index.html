@@ -25,7 +25,7 @@
 $( "#formRunCode" ).submit(function(event) {
   let matrix = $("#inputMatrix").val()
   if (matrix)
-    computeChecksum(matrix)
+    computeChecksumDiv(matrix)
   else
     alert('Please enter a matrix!')
 });
@@ -34,8 +34,8 @@ $( "#formRunCode" ).submit(function(event) {
 // to compute the checksum:
 // 1. find the difference between the largest and smallest values in each row
 // 2. compute the sum of this difference across all rows
-function computeChecksum(matrix) {
-  let lines = $('#inputMatrix').val().split('\n');
+function computeChecksumDiff(matrix) {
+  let lines = matrix.split('\n');
   let checksum = 0
   for (let i=0; i<lines.length; i++) {
     let diff = 0
@@ -48,4 +48,27 @@ function computeChecksum(matrix) {
 
   console.log('output checksum: ' + checksum)
 }
+
+// expect a tab delimited matrix of numbers
+// each row will have 2 entries where one evenly divides the other
+// to compute the checksum:
+// 1. find the difference between the 2 entries that are evenly divisible
+// 2. compute the sum of this difference across all rows
+function computeChecksumDiv(matrix) {
+  let lines = matrix.split('\n');
+  let checksum = 0
+  for (let i=0; i<lines.length; i++) {
+    let diff = 0
+    let sequence = lines[i].split('\t').sort(function(a, b){return b-a})
+    for (let i=0; i<sequence.length; i++) {
+      for (let n=0; n<sequence.length; n++) {
+        if (((sequence[i] % sequence[n]) == 0) && (sequence[i] != sequence[n])) {
+          checksum += sequence[i] / sequence[n]
+        }
+      }
+    }
+  }
+  console.log('output checksum: ' + checksum)
+}
+
 </script>
