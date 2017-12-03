@@ -58,7 +58,6 @@ function computeChecksumDiv(matrix) {
   let lines = matrix.split('\n');
   let checksum = 0
   for (let i=0; i<lines.length; i++) {
-    let diff = 0
     let sequence = lines[i].split('\t').sort(function(a, b){return b-a})
     for (let i=0; i<sequence.length; i++) {
       for (let n=0; n<sequence.length; n++) {
