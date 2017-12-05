@@ -19,6 +19,13 @@
         <button class="btn btn-sm btn-primary" type="submit" id="dupeChecksum">Day2: Duplicates Checksum</button>
         <button class="btn btn-sm btn-primary" type="submit" id="mod0Checksum">Day2: Mod0 Checksum</button>
       </div>
+      <div>
+      </div>
+      <div>
+        <button class="btn btn-sm btn-primary" type="submit" id="checkPass">Day4: Check passphrase</button>
+        <button class="btn btn-sm btn-primary" type="submit" id="checkPassAna">Day4: Check passphrase Anagram</button>
+
+      </div>
 
     </div> <!-- /container -->
 </body>
@@ -27,6 +34,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="./js/day1.js"></script>
 <script src="./js/day2.js"></script>
+<script src="./js/day4.js"></script>
 
 
 <script>
@@ -60,6 +68,19 @@ $('#mod0Checksum').on('click', function(event) {
   validateMatrix()
   console.log('calling computeChecksumDivNoLoop')
   computeChecksumDivNoLoop(matrix)
+});
+
+// Day 4
+$("#checkPass").on('click', function(event) {
+  validateMatrix()
+  console.log('calling checkPassphrase')
+  checkPassphrase(matrix)
+});
+
+$("#checkPassAna").on('click', function(event) {
+  validateMatrix()
+  console.log('calling checkPassphrase')
+  checkPassphrase(matrix, true)
 });
 
 </script>
