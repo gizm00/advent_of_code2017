@@ -24,7 +24,10 @@
       <div>
         <button class="btn btn-sm btn-primary" type="submit" id="checkPass">Day4: Check passphrase</button>
         <button class="btn btn-sm btn-primary" type="submit" id="checkPassAna">Day4: Check passphrase Anagram</button>
-
+      </div>
+      <div>
+        <button class="btn btn-sm btn-primary" type="submit" id="listMaze">Day5: List Maze</button>
+        <button class="btn btn-sm btn-primary" type="submit" id="listMazeOffset">Day5: List Maze Offset/button>
       </div>
 
     </div> <!-- /container -->
@@ -35,6 +38,7 @@
 <script src="./js/day1.js"></script>
 <script src="./js/day2.js"></script>
 <script src="./js/day4.js"></script>
+<script src="./js/day5.js"></script>
 
 
 <script>
@@ -81,6 +85,19 @@ $("#checkPassAna").on('click', function(event) {
   validateMatrix()
   console.log('calling checkPassphrase')
   checkPassphrase(matrix, true)
+});
+
+// Day 5
+$("#listMaze").on('click', function(event) {
+  validateMatrix()
+  console.log('calling listMaze')
+  listMaze(matrix)
+});
+
+$("#listMazeOffset").on('click', function(event) {
+  validateMatrix()
+  console.log('calling listMazeOffset')
+  listMazeOffset(matrix)
 });
 
 </script>
