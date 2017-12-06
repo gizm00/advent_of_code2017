@@ -29,16 +29,22 @@
         <button class="btn btn-sm btn-primary" type="submit" id="listMaze">Day5: List Maze</button>
         <button class="btn btn-sm btn-primary" type="submit" id="listMazeOffset">Day5: List Maze Offset/button>
       </div>
+      <div>
+        <button class="btn btn-sm btn-primary" type="submit" id="day61">Day6: List Maze</button>
+        <button class="btn btn-sm btn-primary" type="submit" id="day62">Day6: List Maze Offset/button>
+      </div>
 
     </div> <!-- /container -->
 </body>
 </html>
 <script type='javascript' src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.js"></script>
 <script src="./js/day1.js"></script>
 <script src="./js/day2.js"></script>
 <script src="./js/day4.js"></script>
 <script src="./js/day5.js"></script>
+<script src="./js/day6.js"></script>
 
 
 <script>
@@ -99,5 +105,19 @@ $("#listMazeOffset").on('click', function(event) {
   console.log('calling listMazeOffset')
   listMazeOffset(matrix)
 });
+
+// Day 6
+$("#day61").on('click', function(event) {
+  validateMatrix()
+  console.log('calling day61')
+  day61(matrix)
+});
+
+$("#day62").on('click', function(event) {
+  validateMatrix()
+  console.log('calling day62')
+  day62(matrix)
+});
+
 
 </script>

@@ -6,7 +6,7 @@ const listMaze = function(inputString) {
   while (currentLocation < list.length) {
     offset = parseInt(list[currentLocation])
     list[currentLocation]++
-    currentLocation
+    currentLocation += offset
     steps++
   }
   console.log("escaped maze in " + steps + " steps")
@@ -17,13 +17,15 @@ const listMazeOffset = function(inputString) {
   let currentLocation = 0
   let offset = 0
   let steps = 0
-  while (currentLocation < list.length  &&  steps < 15) {
-    console.log(list)
+  while (currentLocation < list.length) {
     offset = parseInt(list[currentLocation])
-    list[currentLocation] = parseInt(list[currentLocation]) >= 3 ? list[currentLocation]-- : list[currentLocation]++
+    if (offset >= 3)
+      list[currentLocation]--
+    else
+      list[currentLocation]++
     currentLocation += offset
-    console.log('currentLocation: ' + currentLocation)
     steps++
   }
   console.log("escaped maze in " + steps + " steps")
+
 }
