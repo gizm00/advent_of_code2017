@@ -6,31 +6,25 @@ const day61= function(matrix) {
   let cycles = 0
   let sequence = matrix.split('\t')
   let sequenceLen = sequence.length
+
   console.log('starting sequence: ' + sequence)
-  while (!dupeSequence) {
-    cycles++
+  while (!sequences.includes(sequence.join(' '))) {
     sequences.push(sequence.join(' '))
-    //console.log('updated sequences list: ' + sequences)
-    //console.log(_.uniq(sequences))
-    if (_.uniq(sequences).length !== cycles) {
-      console.log('redistribution done in: ' + cycles + " cycles")
-      dupeSequence = true
-    }
-    let max = _.max(sequence)
-    let index = _.indexOf(sequence, max)
-    sequence[index] = 0
-    index++
-    while (max > 0) {
-      if (index >= sequenceLen)
-        index = 0
+      // reallocate
+      let max = _.max(sequence)
+      let currentIndex = _.indexOf(sequence, max)
+      sequence[currentIndex] = 0
 
-      sequence[index]++
-      index++
-      max--
-    }
-    //console.log('new sequence: ' + sequence)
+      while (max > 0) {
+        currentIndex = (currentIndex + 1) % sequenceLen
+        sequence[currentIndex]++
+        max--
+      }
+      console.log('sequence for next cycle: ' + sequence)
+      cycles++
+
   }
-
+  console.log('redistribution in ' + cycles + ' cycles')
 }
 
 const day62= function(matrix) {
