@@ -1,0 +1,7 @@
+abc (1)
+xyz (26) -> pqr, rst, vwx
+hij (10)
+pqr (20) -> hij, abc
+mno (16)
+rst (22)
+vwx (24)

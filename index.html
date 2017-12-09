@@ -30,8 +30,12 @@
         <button class="btn btn-sm btn-primary" type="submit" id="listMazeOffset">Day5: List Maze Offset/button>
       </div>
       <div>
-        <button class="btn btn-sm btn-primary" type="submit" id="day61">Day6: List Maze</button>
-        <button class="btn btn-sm btn-primary" type="submit" id="day62">Day6: List Maze Offset/button>
+        <button class="btn btn-sm btn-primary" type="submit" id="day61">Day6: Find match</button>
+        <button class="btn btn-sm btn-primary" type="submit" id="day62">Day6: Find match twice/button>
+      </div>
+      <div>
+        <button class="btn btn-sm btn-primary" type="submit" id="day71">Day7: Find match</button>
+        <button class="btn btn-sm btn-primary" type="submit" id="day72">Day7: Find match twice/button>
       </div>
 
     </div> <!-- /container -->
@@ -45,7 +49,7 @@
 <script src="./js/day4.js"></script>
 <script src="./js/day5.js"></script>
 <script src="./js/day6.js"></script>
-
+<script src="./js/day7.js"></script>
 
 <script>
 let matrix = undefined
@@ -117,6 +121,19 @@ $("#day62").on('click', function(event) {
   validateMatrix()
   console.log('calling day61 w repeat 2 ')
   day61(matrix, 2)
+});
+
+// Day 7
+$("#day71").on('click', function(event) {
+  validateMatrix()
+  console.log('calling day71')
+  day71(matrix)
+});
+
+$("#day72").on('click', function(event) {
+  validateMatrix()
+  console.log('calling day71')
+  day72(matrix, 2)
 });
 
 
