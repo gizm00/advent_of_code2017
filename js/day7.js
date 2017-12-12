@@ -49,8 +49,7 @@ const day71 = function(matrix) {
             // the child element also has children, need to update the generation
             // of both this child and its children
             console.log('child ' + tower[childElementIndex].name + ' has children')
-            tower[childElementIndex].generation++
-            element.generation++
+            element.generation = tower[childElementIndex].generation + 1
           }
         }
       }

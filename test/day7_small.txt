@@ -1,7 +1,14 @@
+<<<<<<< Updated upstream
 abc (1) -> hij
 xyz (26) -> pqr, rst, vwx
 hij (10)
 pqr (20) -> abc
+=======
+abc (1)
+xyz (26) -> pqr
+hij (10) -> abc, rst, vwx
+pqr (20) -> hij
+>>>>>>> Stashed changes
 mno (16)
 rst (22)
 vwx (24)
