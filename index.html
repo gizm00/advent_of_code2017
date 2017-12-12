@@ -10,6 +10,8 @@
   <div class="container">
       <label for="inputMatrix">Text input: </label>
       <textarea id="inputMatrix"></textarea>
+      <label for="inputMatrix2">Text input: </label>
+      <textarea id="inputMatrix2"></textarea>
       <label for="parseHalf">Parse sequence by half: </label>
       <input type="checkbox" id="parseHalf" checked=false></input>
       <div>
@@ -35,7 +37,11 @@
       </div>
       <div>
         <button class="btn btn-sm btn-primary" type="submit" id="day71">Day7: Find match</button>
-        <button class="btn btn-sm btn-primary" type="submit" id="day72">Day7: Find match twice/button>
+        <button class="btn btn-sm btn-primary" type="submit" id="day72">Day7: Find match twice</button>
+      </div>
+      <div>
+        <button class="btn btn-sm btn-primary" type="submit" id="day101">Day10: Find sum of first 2</button>
+        <button class="btn btn-sm btn-primary" type="submit" id="day102">Day10: Part 2</button>
       </div>
 
     </div> <!-- /container -->
@@ -50,15 +56,24 @@
 <script src="./js/day5.js"></script>
 <script src="./js/day6.js"></script>
 <script src="./js/day7.js"></script>
+<script src="./js/day10.js"></script>
+
 
 <script>
 let matrix = undefined
+let matrix2 = undefined
 
 // Utility functions
 let validateMatrix = function() {
   matrix = $("#inputMatrix").val()
   if (matrix === undefined)
     alert('Please enter a matrix!')
+};
+
+let validateMatrix2 = function() {
+  matrix2 = $("#inputMatrix2").val()
+  if (matrix2 === undefined)
+    alert('Please enter a matrix2!')
 };
 
 // Day 1
@@ -136,5 +151,16 @@ $("#day72").on('click', function(event) {
   day72(matrix, 2)
 });
 
+$("#day101").on('click', function(event) {
+  validateMatrix()
+  console.log('calling day101')
+  day101(matrix)
+});
+
+$("#day102").on('click', function(event) {
+  validateMatrix()
+  console.log('calling day101')
+  //day102(matrix, 2)
+});
 
 </script>
