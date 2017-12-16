@@ -4,6 +4,7 @@ const parseInstructions = function(input) {
 	let commands = input.split('\n')
   //console.log(commands.length)
   let registers = []
+	let highest = 0
   for (i=0; i<commands.length; i++) {
   	let command = commands[i]
 		//console.log('current command:' + command)
@@ -76,9 +77,13 @@ const parseInstructions = function(input) {
     // update the target register with the new value
     registers[targetRegIndex].value = result
     //console.log('for ' + command + " result is: " + result)
+
+		if (result > highest)
+			highest = result
   }
 
 	let maximum = _.map(registers, function(x) { return parseInt(x.value)}).reduce(function(a,b) { return Math.max(a,b)})
 	console.log(registers)
-	console.log(maximum)
+	console.log('final max value of registers: ' + maximum)
+	console.log('highest value held in a register during execution: ' + highest)
 }
