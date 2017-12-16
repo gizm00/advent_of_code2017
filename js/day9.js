@@ -47,7 +47,8 @@ const findGroups = function(input) {
     // garbage should be next, because it dgaf about the chars inside (including {})
     // unless it is close garbage
     if (garbageStarted && closeGarbage) { garbageStarted = false; continue}
-		if (garbageStarted && (openGarbage || openGroup || closeGroup)) continue
+
+		if (garbageStarted && (openGarbage || openGroup || closeGroup)) {countGarbageChar++; continue}
 
 		// if we are not in garbage...
       // if a group is started:
@@ -63,10 +64,15 @@ const findGroups = function(input) {
     // if we are here, neither group nor garbage has been started
     if (openGroup && !groupStarted) { countOpenGroups++; groupStarted=true}
     if (openGarbage && !garbageStarted) garbageStarted=true
+
+		// and if we are HERE the content is likely not open/closing garbage or groups
+		// so, we should count it as garbage if garbage is open
+		if (garbageStarted && !closeGarbage && !openGarbage) {countGarbageChar++; continue}
   }
 
 	const add = (a,b) => a+b
 	//console.log(groupScore)
+	console.log("garbage count: " + countGarbageChar)
 	if (groupScore.length != 0) {
 		let sum = groupScore.reduce(add)
 		console.log(sum)
