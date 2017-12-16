@@ -40,8 +40,11 @@
         <button class="btn btn-sm btn-primary" type="submit" id="day72">Day7: Find match twice</button>
       </div>
       <div>
-        <button class="btn btn-sm btn-primary" type="submit" id="day91">Day9: Streams - sum</button>
-        <button class="btn btn-sm btn-primary" type="submit" id="day92">Day9: Part 2</button>
+        <button class="btn btn-sm btn-primary" type="submit" id="day81">Day8: Captains command</button>
+        <button class="btn btn-sm btn-primary" type="submit" id="day82">Day8: Part 2</button>
+      </div>
+      <div>
+        <button class="btn btn-sm btn-primary" type="submit" id="day91">Day9: Streams</button>
       </div>
       <div>
         <button class="btn btn-sm btn-primary" type="submit" id="day101">Day10: Find sum of first 2</button>
@@ -60,6 +63,7 @@
 <script src="./js/day5.js"></script>
 <script src="./js/day6.js"></script>
 <script src="./js/day7.js"></script>
+<script src="./js/day8.js"></script>
 <script src="./js/day9.js"></script>
 <script src="./js/day10.js"></script>
 
@@ -154,6 +158,13 @@ $("#day72").on('click', function(event) {
   validateMatrix()
   console.log('calling day71')
   day72(matrix, 2)
+});
+
+// day 8
+$("#day81").on('click', function(event) {
+  validateMatrix()
+  console.log('calling day81')
+  parseInstructions(matrix)
 });
 
 // day 9
