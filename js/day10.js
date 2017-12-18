@@ -9,6 +9,28 @@ function convertToAscii(inputSeq) {
   return ascii
 }
 
+function calculateDenseHash(list) {
+	// expect list to have 256 items
+  let denseHashes = []
+  for (i=0; i<list.length;i=i+16) {
+  	let sub = list.slice(i,i+16)
+    console.log('sub list for dense hash')
+    console.log(sub)
+    let hash = sub.reduce(function(acc,b) { return acc ^ b})
+    console.log(hash)
+  	denseHashes.push(hash)
+  }
+  return denseHashes
+}
+
+function convertToHex(hashes) {
+	let hexVal = ''
+  hashes.forEach(function(hash) {
+  	hexVal = hexVal + hash.toString(16)
+  })
+  return hexVal
+}
+
 function circularReverse(list, index, length, skipSize) {
 	//console.log('reversing list starting at ' + index + ' for length ' + length + ' at skip size ' + skipSize)
   if (index + length < list.length) {
@@ -62,18 +84,25 @@ function twistyTime(input, rangeMax, numRounds) {
   for (i=0; i<numRounds; i++) {
     input.forEach( (length) => {
       array = circularReverse(array, currentIndex, length, skipSize)
-      currentIndex = (currentIndex + length + skipSize) > array.length ? (currentIndex + length + skipSize)- array.length : (currentIndex + length + skipSize)
-      skipSize++
+      if (i < 0) {
+        currentIndex = (currentIndex + length + skipSize) > array.length ? (currentIndex + length + skipSize)- array.length : (currentIndex + length + skipSize)
+        skipSize++
+      }
     })
   }
 
   console.log(array)
   let firstProd = array[0] * array[1]
   console.log('product of first 2: ' + firstProd)
+  return array
  }
 
 //let lengths = [70,66,255,2,48,0,54,48,80,141,244,254,160,108,1,41]
 let lengths = convertToAscii("1,2,3")
 console.log('lengths')
 console.log(lengths)
-twistyTime(lengths, 255, 64)
+let twisted = twistyTime(lengths, 255, 64)
+let denseHash = calculateDenseHash(twisted)
+console.log(denseHash)
+let hexVal = convertToHex(denseHash)
+console.log(hexVal)
