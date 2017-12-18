@@ -1,3 +1,14 @@
+function convertToAscii(inputSeq) {
+	let ascii = []
+  for(i=0; i<inputSeq.length; i++) {
+  	ascii.push(inputSeq[i].charCodeAt(0))
+  }
+  console.log('ascii list')
+  ascii = ascii.concat([17, 31, 73, 47, 23])
+  console.log(ascii)
+  return ascii
+}
+
 function circularReverse(list, index, length, skipSize) {
 	//console.log('reversing list starting at ' + index + ' for length ' + length + ' at skip size ' + skipSize)
   if (index + length < list.length) {
@@ -41,22 +52,28 @@ function circularReverse(list, index, length, skipSize) {
 	return list
 }
 
-function twistyTime(input, rangeMax) {
+function twistyTime(input, rangeMax, numRounds) {
 	let array = []
   let currentIndex = 0
   let skipSize = 0
   for (i=0;i<=rangeMax;i++) array.push(i)
+  console.log('array length ' + array.length)
 
-  input.forEach( (length) => {
-  	array = circularReverse(array, currentIndex, length, skipSize)
-    currentIndex = (currentIndex + length + skipSize) > array.length ? (currentIndex + length + skipSize)- array.length : (currentIndex + length + skipSize)
-    skipSize++
-  })
+  for (i=0; i<numRounds; i++) {
+    input.forEach( (length) => {
+      array = circularReverse(array, currentIndex, length, skipSize)
+      currentIndex = (currentIndex + length + skipSize) > array.length ? (currentIndex + length + skipSize)- array.length : (currentIndex + length + skipSize)
+      skipSize++
+    })
+  }
 
   console.log(array)
   let firstProd = array[0] * array[1]
   console.log('product of first 2: ' + firstProd)
  }
 
-let lengths = [70,66,255,2,48,0,54,48,80,141,244,254,160,108,1,41]
-twistyTime(lengths, 255)
+//let lengths = [70,66,255,2,48,0,54,48,80,141,244,254,160,108,1,41]
+let lengths = convertToAscii("1,2,3")
+console.log('lengths')
+console.log(lengths)
+twistyTime(lengths, 255, 64)
