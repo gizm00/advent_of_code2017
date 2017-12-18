@@ -1,73 +1,62 @@
-const day101 = function(matrix) {
-    //max = 256
-    let max = 256
-    let inputSequence = []
-    let lengths = matrix.split(',').map(Number)
-    let index = 0
-    let skipSize = 0
-    for (i=0; i<max; i++) inputSequence.push(i)
-    inputSequence = inputSequence.map(Number)
-    console.log(inputSequence)
-
-    for (i=0; i<lengths.length; i++) {
-        let currentLength = lengths[i]
-        if (currentLength > inputSequence.length) {
-          //  console.log('current length ' + currentLength + ' greater than sequence length')
-            continue
-          }
-        if (currentLength <= 1) {
-          //console.log('current length is zero or one, no change')
-          index = (index + skipSize + currentLength) % max
-          skipSize++
-          //console.log('new index ' + index + ' new skip size: ' + skipSize)
-          continue
-        }
-
-        let reversedSub = []
-        let maxI = index + currentLength
-        if (maxI >= inputSequence.length) {
-          //console.log('length wraps around list')
-          //console.log('current index: ' + index)
-          //console.log('current length: ' + currentLength)
-          for (n=index; n<max; n++){
-            reversedSub.push(inputSequence[n])
-          }
-          //console.log('first part of sequence: ' + reversedSub)
-          // overlap end of list
-          for(n=0; n<(index + currentLength - max); n++){
-          //  console.log('adding index ' + n )
-            reversedSub.push(inputSequence[n])
-          }
-          //console.log('second part of sequence: ' + reversedSub)
-          reversedSub = reversedSub.reverse()
-          //console.log('reversed substring' + reversedSub)
-          //console.log('reversed slice: ' + reversedSub.slice(0,max-index))
-          inputSequence.splice(index, max-index+1, ...reversedSub.slice(0,max-index))
-          //console.log('spliced in end of sequence ' + inputSequence)
-          inputSequence.splice(0, (index + currentLength - max),
-            ...reversedSub.slice(max-index))
-
-          //console.log('updated inputsequence: ' + inputSequence)
-        }
-        else {
-          if (currentLength-index > 0) {
-            reversedSub = inputSequence.slice(index, currentLength).reverse()
-            inputSequence.splice(index, currentLength, ...reversedSub)
-          }
-          else {
-            reversedSub = inputSequence[index]
-            inputSequence.splice(index, currentLength, reversedSub)
-          }
-          //console.log('reversed substring: ' + reversedSub)
-
-        }
-
-        //console.log('updated inputSequence: ' + inputSequence)
-        index = (index + skipSize + currentLength) % max
-        skipSize++
-        //console.log('new index ' + index + ' new skip size: ' + skipSize)
-    }
-    console.log('output sequence')
-    console.log(inputSequence)
-
+function circularReverse(list, index, length, skipSize) {
+	//console.log('reversing list starting at ' + index + ' for length ' + length + ' at skip size ' + skipSize)
+  if (index + length < list.length) {
+  	//console.log('simple reverse')
+  	// nothing exciting here, just take the substring and reverse
+    let sub = list.slice(index,index+length)
+    //console.log('to reverse: ')
+    //console.log(sub)
+    sub = sub.reverse()
+    //console.log('reversed ' )
+    //console.log(sub)
+    list.splice(index, length, ...sub)
+    //console.log('spliced list')
+    //console.log(list)
+  }
+  else {
+  	// need to wrap selection/reverse around end of list
+    // first, capture elements at the end of the list
+    //console.log('wrap around reverse')
+    let subEnd = list.slice(index, list.length)
+    let covered = list.length - index
+    let subStart = list.slice(0, length-covered)
+    //console.log('first reverse: ' )
+    //console.log(subEnd)
+    //console.log('second reverse: ')
+    //console.log(subStart)
+    let sub = subEnd.concat(...subStart)
+    //console.log('to reverse: ' )
+    //console.log(sub)
+    sub = sub.reverse()
+    //console.log('reversed: ')
+    //console.log(sub)
+    list.splice(index, list.length, ...sub.slice(0,covered))
+    //console.log('list after splicing in first part: ')
+    //console.log(list)
+    //console.log('covered ' + covered)
+    list.splice(0, length-covered, ...sub.slice(covered))
+    //console.log('list after splicing in second part: ' )
+    //console.log(list)
+  }
+	return list
 }
+
+function twistyTime(input, rangeMax) {
+	let array = []
+  let currentIndex = 0
+  let skipSize = 0
+  for (i=0;i<=rangeMax;i++) array.push(i)
+
+  input.forEach( (length) => {
+  	array = circularReverse(array, currentIndex, length, skipSize)
+    currentIndex = (currentIndex + length + skipSize) > array.length ? (currentIndex + length + skipSize)- array.length : (currentIndex + length + skipSize)
+    skipSize++
+  })
+
+  console.log(array)
+  let firstProd = array[0] * array[1]
+  console.log('product of first 2: ' + firstProd)
+ }
+
+let lengths = [70,66,255,2,48,0,54,48,80,141,244,254,160,108,1,41]
+twistyTime(lengths, 255)
